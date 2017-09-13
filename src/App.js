@@ -14,7 +14,10 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to React</h2>
         </div>
-        <Spaceship name="Enterprise">
+        <Spaceship
+          name="Enterprise"
+          commanderType="BadAlien"
+          >
           <CrewMember name="Riker" rank="Commander" />
           <CrewMember name="Wesley Crusher" rank="Ensign" />
           <BadAlien name="Bjorn" species="Borg" />
