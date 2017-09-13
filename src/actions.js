@@ -17,13 +17,20 @@ This is what we want to produce as an action object:
   location: 'LOCATION_SHIP',
 }
 
+{
+  type: ADD_SHIP,
+  name: 'Enterprise',
+  id: 54321
+}
 
 */
 
 const ADD_MEMBER = 'ADD_MEMBER';
 const BEAM_MEMBER = 'BEAM_MEMBER';
+const ADD_SHIP = 'ADD_SHIP';
 
 export default {
   ADD_MEMBER,
   BEAM_MEMBER,
+  ADD_SHIP,
 }
