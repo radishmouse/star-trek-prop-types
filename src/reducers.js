@@ -1,5 +1,10 @@
 import actions from './actions';
 
+export const LOCATIONS = {
+  TRANSPORTER_ROOM: 'TRANSPORTER_ROOM',
+  PLANET_EARTH: 'PLANET_EARTH',
+  PLANET_THE_SUN: 'PLANET_THE_SUN',
+}
 
 const crewMembers = (state=[], action) => {
   switch (action.type) {
@@ -17,8 +22,16 @@ const crewMembers = (state=[], action) => {
           // make a copy(?) of the crewMember
           // but changing the location
 
+          // if (action.location in LOCATIONS) {
+          // }
+
+          let newLocation = crewMember.location;
+          if (action.location in LOCATIONS) {
+            newLocation = action.location;
+          }
+
           return Object.assign({}, crewMember, {
-            location: action.location
+            location: newLocation
           });
 
           // DO NOT DO THIS THING HERE BELOW.
@@ -29,6 +42,7 @@ const crewMembers = (state=[], action) => {
         }
         // otherwise, just return the crewMember
       });
+      break;
     default:
       return state;
   }
