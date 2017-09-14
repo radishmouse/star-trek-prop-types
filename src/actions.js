@@ -23,14 +23,31 @@ This is what we want to produce as an action object:
   id: 54321
 }
 
+{
+  type: ADD_PLANET,
+  name: 'Earth',
+  id: 5432112345
+}
+
+{
+  type: TRANSFER_CRYSTALS,
+  howMany: 1,
+  planetId: 4,
+  shipId: 1
+}
+
 */
 
 const ADD_MEMBER = 'ADD_MEMBER';
 const BEAM_MEMBER = 'BEAM_MEMBER';
 const ADD_SHIP = 'ADD_SHIP';
+const ADD_PLANET = 'ADD_PLANET';
+const TRANSFER_CRYSTALS = 'TRANSFER_CRYSTALS';
 
 export default {
   ADD_MEMBER,
   BEAM_MEMBER,
   ADD_SHIP,
+  ADD_PLANET,
+  TRANSFER_CRYSTALS,
 }
