@@ -2,15 +2,18 @@ import { combineReducers } from 'redux';
 import * as actions from './actions';
 import * as constants from './constants';
 
+import _ from 'lodash';
+
 const defaultLocationsState = {
   planets: {},
   ships: {}
 };
 
 const locations = (state=defaultLocationsState, action) => {
+  let newState;
   switch (action.type) {
     case constants.ADD_LOCATION:
-      const newState = {...state};
+      newState = {...state};
       if (action.locationType === constants.LOCATION_SHIP) {
         newState.ships[action.id] = {
           id: action.id,
@@ -23,6 +26,19 @@ const locations = (state=defaultLocationsState, action) => {
           name: action.name,
           resources: action.resources
         }
+      }
+      return newState;
+    case constants.ADD_RESOURCE:
+      newState = {...state};
+      let arrayOfLocations = _.flatten(Object.keys(newState).map( loc => {
+        return [].concat(_.values(newState[loc]));
+      }))
+
+      let locationThatIWantToChange = arrayOfLocations.filter( loc => loc.id === action.id)[0]; // GIANT ASSumption
+
+      locationThatIWantToChange.resources = {
+        ...locationThatIWantToChange.resources,
+        [action.resource]:  locationThatIWantToChange.resources[action.resource] + action.howMany
       }
       return newState;
     default:

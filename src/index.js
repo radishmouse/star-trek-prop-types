@@ -13,11 +13,19 @@ import starTrekApp from './reducers';
 
 import { createStore } from 'redux';
 
+import _ from 'lodash';
+
+window._ = _;
+
+
 const store = createStore(starTrekApp, {});
+
+
 
 window.store = store;
 window.actions = actions;
 window.constants = constants;
+
 
 // store.dispatch({
 //   type: window.ADD_SHIP,
