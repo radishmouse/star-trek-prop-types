@@ -73,7 +73,7 @@ This is what we want to produce as an action object:
     cargo: 10000000000
   }
 }
-const LOCATION_PLANET = 'planets'
+
 {
   type: ADD_LOCATION,
   locationType: LOCATION_PLANET
@@ -105,8 +105,67 @@ const ADD_LOCATION = 'ADD_LOCATION';
 const ADD_RESOURCE = 'ADD_RESOURCE';
 const REMOVE_RESOURCE = 'REMOVE_RESOURCE';
 
+const LOCATION_PLANET = 'planet';
+const LOCATION_SHIP = 'ship';
+
+const addMember = (name, rank, id, location) => {
+  return {
+    type: ADD_MEMBER,
+    name: name,
+    rank: rank,
+    id: id,
+    location: location,
+  }
+};
+
+const beamMember = (id, locationId) => {
+ return {
+    type: BEAM_MEMBER,
+    id: id,
+    location: locationId,
+  }
+};
+
+const addShip = (name, id, resources) => {
+  return {
+    type: ADD_LOCATION,
+    locationType: LOCATION_SHIP,
+    name: name,
+    id: id,
+    resources: resources
+  }
+};
+
+// EXAMPLES OF HOW TO USE. DO NOT PUT IN actions.js
+// JUST SHOWING ON SCREEN FOR DEMO ;P
+store.dispatch(addShip('Enterprise', 100, {}));
+
+// THIS GOES IN reducers.js
+const locations = (state={ planets: {}, ships: {}}, action) => {
+  switch (action.type) {
+    case ADD_LOCATION:
+      const newState = {...state};
+      if (action.locationType === LOCATION_SHIP) {
+        newState.ships[action.id] = {
+          id: action.id,
+          name: action.name,
+          resources: action.resources
+        }
+      } else {
+        newState.planets[action.id] = {
+          id: action.id,
+          name: action.name,
+          resources: action.resources
+        }
+      }
+      return newState;
+    default:
+      return state;
+  }
+}
 
 
 
 export default {
+  addMember,
 }
