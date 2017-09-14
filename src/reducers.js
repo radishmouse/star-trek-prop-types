@@ -1,13 +1,36 @@
 import { combineReducers } from 'redux';
-import actions from './actions';
+import * as actions from './actions';
+import * as constants from './constants';
 
-export const LOCATIONS = {
-  TRANSPORTER_ROOM: 'TRANSPORTER_ROOM',
-  PLANET_EARTH: 'PLANET_EARTH',
-  PLANET_THE_SUN: 'PLANET_THE_SUN',
+const defaultLocationsState = {
+  planets: {},
+  ships: {}
+};
+
+const locations = (state=defaultLocationsState, action) => {
+  switch (action.type) {
+    case constants.ADD_LOCATION:
+      const newState = {...state};
+      if (action.locationType === constants.LOCATION_SHIP) {
+        newState.ships[action.id] = {
+          id: action.id,
+          name: action.name,
+          resources: action.resources
+        }
+      } else if (action.locationType === constants.LOCATION_PLANET) {
+        newState.planets[action.id] = {
+          id: action.id,
+          name: action.name,
+          resources: action.resources
+        }
+      }
+      return newState;
+    default:
+      return state;
+  }
 }
 
-
+/*
 const planets = (state=[], action) => {
 
   switch (action.type) {
@@ -66,8 +89,9 @@ const ships = (state=[], action) => {
       return state;
   }
 }
+*/
 
-
+/*
 const crewMembers = (state=[], action) => {
   switch (action.type) {
     case actions.ADD_MEMBER:
@@ -132,9 +156,7 @@ const crewMembers = (state=[], action) => {
       return state;
   }
 }
-
+*/
 export default combineReducers({
-  ships,
-  crewMembers,
-  planets,
+  locations,
 });

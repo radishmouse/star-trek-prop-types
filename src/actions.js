@@ -1,3 +1,6 @@
+
+import * as constants from './constants';
+
 let thingy = {
   locations: {
     planets: {
@@ -36,13 +39,7 @@ let thingy = {
   }
 }
 
-/*
 
-
-
-
-
-*/
 
 
 
@@ -65,14 +62,6 @@ This is what we want to produce as an action object:
   location: 1000,
 }
 
-{
-  type: ADD_SHIP,
-  name: 'Enterprise',
-  id: 54321,
-  resources: {
-    cargo: 10000000000
-  }
-}
 
 {
   type: ADD_LOCATION,
@@ -99,18 +88,9 @@ This is what we want to produce as an action object:
 
 */
 
-const ADD_MEMBER = 'ADD_MEMBER';
-const BEAM_MEMBER = 'BEAM_MEMBER';
-const ADD_LOCATION = 'ADD_LOCATION';
-const ADD_RESOURCE = 'ADD_RESOURCE';
-const REMOVE_RESOURCE = 'REMOVE_RESOURCE';
-
-const LOCATION_PLANET = 'planet';
-const LOCATION_SHIP = 'ship';
-
-const addMember = (name, rank, id, location) => {
+export const addMember = (name, rank, id, location) => {
   return {
-    type: ADD_MEMBER,
+    type: constants.ADD_MEMBER,
     name: name,
     rank: rank,
     id: id,
@@ -118,24 +98,54 @@ const addMember = (name, rank, id, location) => {
   }
 };
 
-const beamMember = (id, locationId) => {
+export const beamMember = (id, locationId) => {
  return {
-    type: BEAM_MEMBER,
+    type: constants.BEAM_MEMBER,
     id: id,
     location: locationId,
   }
 };
 
-const addShip = (name, id, resources) => {
+export const addShip = (name, id, resources) => {
   return {
-    type: ADD_LOCATION,
-    locationType: LOCATION_SHIP,
+    type: constants.ADD_LOCATION,
+    locationType: constants.LOCATION_SHIP,
     name: name,
     id: id,
     resources: resources
   }
 };
 
+export const addPlanet = (name, id, resources) => {
+  return {
+    type: constants.ADD_LOCATION,
+    locationType: constants.LOCATION_PLANET,
+    name: name,
+    id: id,
+    resources: resources
+  }
+};
+
+export const removeResource = (resourceName, howMany, idToRemoveFrom) => {
+  return {
+    type: constants.REMOVE_RESOURCE,
+    resource: resourceName,
+    howMany: howMany,
+    id: idToRemoveFrom
+  }
+};
+
+export const addResource = (resourceName, howMany, idToAddTo) => {
+  return {
+    type: constants.ADD_RESOURCE,
+    resource: resourceName,
+    howMany: howMany,
+    id: idToAddTo
+  }
+};
+
+
+/*
 // EXAMPLES OF HOW TO USE. DO NOT PUT IN actions.js
 // JUST SHOWING ON SCREEN FOR DEMO ;P
 store.dispatch(addShip('Enterprise', 100, {}));
@@ -163,9 +173,9 @@ const locations = (state={ planets: {}, ships: {}}, action) => {
       return state;
   }
 }
+*/
 
 
-
-export default {
-  addMember,
-}
+// export default {
+//   addMember,
+// }
