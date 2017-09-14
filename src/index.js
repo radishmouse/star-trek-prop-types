@@ -73,5 +73,35 @@ store.dispatch({
 })
 
 
+
+const transferCrystals = (store, howMany, fromId, toId) => {
+  // getState, see if there are enough crystals
+
+  const allPlanets = store.getState().planets;
+  const thePlanet = allPlanets.filter( planet => fromId === planet.id)[0]; // GIANT ASSUMPTION HERE!!!
+
+  // then dispatch two actions
+  if (thePlanet.crystals >= howMany) {
+    store.dispatch({
+      type: actions.REMOVE_CRYSTALS,
+      howMany: howMany,
+      id: fromId
+    });
+    store.dispatch({
+      type: actions.ADD_CRYSTALS,
+      howMany: howMany,
+      id: toId
+    });
+  } else {
+    // don't do nuthin.
+    // stop it.
+  }
+
+
+};
+
+window.transferCrystals = transferCrystals;
+
+
 ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();

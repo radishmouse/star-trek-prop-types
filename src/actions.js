@@ -30,10 +30,9 @@ This is what we want to produce as an action object:
 }
 
 {
-  type: TRANSFER_CRYSTALS,
+  type: REMOVE_CRYSTALS,
   howMany: 1,
-  planetId: 4,
-  shipId: 1
+  id: 1
 }
 
 */
@@ -42,12 +41,14 @@ const ADD_MEMBER = 'ADD_MEMBER';
 const BEAM_MEMBER = 'BEAM_MEMBER';
 const ADD_SHIP = 'ADD_SHIP';
 const ADD_PLANET = 'ADD_PLANET';
-const TRANSFER_CRYSTALS = 'TRANSFER_CRYSTALS';
+const ADD_CRYSTALS = 'ADD_CRYSTALS';
+const REMOVE_CRYSTALS = 'REMOVE_CRYSTALS';
 
 export default {
   ADD_MEMBER,
   BEAM_MEMBER,
   ADD_SHIP,
   ADD_PLANET,
-  TRANSFER_CRYSTALS,
+  ADD_CRYSTALS,
+  REMOVE_CRYSTALS,
 }
